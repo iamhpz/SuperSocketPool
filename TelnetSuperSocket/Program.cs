@@ -17,9 +17,9 @@ namespace TelnetSuperSocket
             Console.ReadKey();
             Console.WriteLine();
 
-            var appServer = new AppServer();
+            var appServer = new TelnetServer();
 
-            appServer.NewSessionConnected += new SessionHandler<AppSession>(appServer_NewSessionConnected);
+            appServer.NewSessionConnected += new SessionHandler<TelnetSession>(appServer_NewSessionConnected);
 
             //方法一
             //appServer.NewRequestReceived += new RequestHandler<AppSession, StringRequestInfo>(appServer_NewRequestReceived);
@@ -54,7 +54,7 @@ namespace TelnetSuperSocket
             Console.ReadKey();
         }
 
-        private static void appServer_NewSessionConnected(AppSession session)
+        private static void appServer_NewSessionConnected(TelnetSession session)
         {
             session.Send("Welcome to SuperSocket Telnet Server");
         }

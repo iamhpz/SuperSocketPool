@@ -67,6 +67,7 @@
     <Compile Include="Command\MULT.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TelnetServer.cs" />
     <Compile Include="TelnetSession.cs" />
   </ItemGroup>
   <ItemGroup>
