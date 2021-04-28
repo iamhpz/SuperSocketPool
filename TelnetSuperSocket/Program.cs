@@ -1,5 +1,6 @@
 ﻿using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Protocol;
+using SuperSocket.SocketEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,35 +13,75 @@ namespace TelnetSuperSocket
     {
         private static void Main(string[] args)
         {
+            {
+            //    Console.WriteLine("Press any key to start the server!");
+
+            //    Console.ReadKey();
+            //    Console.WriteLine();
+
+            //    var appServer = new TelnetServer();
+
+            //    appServer.NewSessionConnected += new SessionHandler<TelnetSession>(appServer_NewSessionConnected);
+
+            //    //方法一
+            //    //appServer.NewRequestReceived += new RequestHandler<AppSession, StringRequestInfo>(appServer_NewRequestReceived);
+
+            //    if (!appServer.Setup(2012))
+            //    {
+            //        Console.WriteLine("Failed to setup!");
+            //        Console.ReadKey();
+            //        return;
+            //    }
+
+            //    Console.WriteLine();
+
+            //    if (!appServer.Start())
+            //    {
+            //        Console.WriteLine("Failed to start!");
+            //        Console.ReadKey();
+            //        return;
+            //    }
+
+            //    Console.WriteLine("The server started successfully, press key 'q' to stop it!");
+
+            //    while (Console.ReadKey().KeyChar != 'q')
+            //    {
+            //        Console.WriteLine();
+            //        continue;
+            //    }
+
+            //    appServer.Stop();
+
+            //    Console.WriteLine("The server was stopped!");
+            //    Console.ReadKey();
+            }
+
             Console.WriteLine("Press any key to start the server!");
 
             Console.ReadKey();
             Console.WriteLine();
 
-            var appServer = new TelnetServer();
+            var bootstrap = BootstrapFactory.CreateBootstrap();
 
-            appServer.NewSessionConnected += new SessionHandler<TelnetSession>(appServer_NewSessionConnected);
-
-            //方法一
-            //appServer.NewRequestReceived += new RequestHandler<AppSession, StringRequestInfo>(appServer_NewRequestReceived);
-
-            if (!appServer.Setup(2012))
+            if (!bootstrap.Initialize())
             {
-                Console.WriteLine("Failed to setup!");
+                Console.WriteLine("Failed to initialize!");
                 Console.ReadKey();
                 return;
             }
 
-            Console.WriteLine();
+            var result = bootstrap.Start();
 
-            if (!appServer.Start())
+            Console.WriteLine("Start result: {0}!", result);
+
+            if (result == StartResult.Failed)
             {
                 Console.WriteLine("Failed to start!");
                 Console.ReadKey();
                 return;
             }
 
-            Console.WriteLine("The server started successfully, press key 'q' to stop it!");
+            Console.WriteLine("Press key 'q' to stop it!");
 
             while (Console.ReadKey().KeyChar != 'q')
             {
@@ -48,7 +89,10 @@ namespace TelnetSuperSocket
                 continue;
             }
 
-            appServer.Stop();
+            Console.WriteLine();
+
+            //Stop the appServer
+            bootstrap.Stop();
 
             Console.WriteLine("The server was stopped!");
             Console.ReadKey();

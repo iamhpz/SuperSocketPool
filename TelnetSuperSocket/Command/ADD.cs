@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace TelnetSuperSocket.Command
 {
-    public class ADD : CommandBase<AppSession, StringRequestInfo>
+    public class ADD : CommandBase<TelnetSession, StringRequestInfo>
     {
-        public override void ExecuteCommand(AppSession session, StringRequestInfo requestInfo)
+        public override void ExecuteCommand(TelnetSession session, StringRequestInfo requestInfo)
         {
             session.Send(requestInfo.Parameters.Select(p => Convert.ToInt32(p)).Sum().ToString());
         }

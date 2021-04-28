@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace TelnetSuperSocket.Command
 {
-    public class ECHO :CommandBase<AppSession,StringRequestInfo>
+    public class ECHO :CommandBase<TelnetSession,StringRequestInfo>
     {
-        public override void ExecuteCommand(AppSession session, StringRequestInfo requestInfo)
+        public override void ExecuteCommand(TelnetSession session, StringRequestInfo requestInfo)
         {
             session.Send(requestInfo.Body);
         }
